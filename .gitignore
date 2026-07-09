@@ -1,0 +1,7 @@
+node_modules/
+src-tauri/target
+package-lock.json
+dist
+.vite
+src-tauri/gen
+my_fb_data/
