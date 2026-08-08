@@ -7,6 +7,7 @@ A tool to explore your own downloaded facebook data. Your files never touch the 
 - **Node.js** v23.11.0 (or later) — [nodejs.org](https://nodejs.org)
 - **Rust** (stable toolchain) — install via [rustup.rs](https://rustup.rs)
 - **Tauri CLI** — installed automatically via npm devDependencies, or globally with `cargo install tauri-cli`
+- **ffmpeg** - `brew install ffmpeg`
 
 
 ## Setup

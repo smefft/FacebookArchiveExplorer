@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, Clock, MessageSquare, ShieldAlert, Book, FolderOpen } from 'lucide-react';
+import { LayoutDashboard, Clock, MessageSquare, ShieldAlert, Book, FolderOpen, Video } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { load } from '@tauri-apps/plugin-store';
 import Albums from './pages/Albums';
+import Videos from './pages/Videos';
 
 // --- Sidebar Component ---
 function Sidebar({ activeTab, setActiveTab, archivePath, onChangeFolder }) {
   const navItems = [
-    { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
+    //{ id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
     { id: 'albums', label: 'Photo Albums', icon: Book },
-    { id: 'timeline', label: 'Memory Timeline', icon: Clock },
-    { id: 'messenger', label: 'Local Messenger', icon: MessageSquare },
-    { id: 'privacy', label: 'Off-Facebook Apps', icon: ShieldAlert },
+    { id: 'videos', label: 'Videos', icon: Video }
+    //{ id: 'timeline', label: 'Memory Timeline', icon: Clock },
+    //{ id: 'messenger', label: 'Local Messenger', icon: MessageSquare },
+    //{ id: 'privacy', label: 'Off-Facebook Apps', icon: ShieldAlert },
   ];
 
   return (
@@ -151,10 +153,8 @@ export default function App() {
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} archivePath={archivePath} onChangeFolder={handleChangeFolder} />
       <main style={{ flex: 1, height: '100vh', overflowY: 'auto', boxSizing: 'border-box' }}>
         {activeTab === 'albums' && <Albums archivePath={archivePath} onChangeFolder={handleChangeFolder} />}
-        {activeTab === 'dashboard' && <div style={{ padding: '3rem', fontSize: '1.5rem', color: '#6b7280' }}>Dashboard Overview coming soon...</div>}
-        {activeTab === 'timeline' && <div style={{ padding: '3rem', fontSize: '1.5rem', color: '#6b7280' }}>Memory Timeline coming soon...</div>}
-        {activeTab === 'messenger' && <div style={{ padding: '3rem', fontSize: '1.5rem', color: '#6b7280' }}>Local Messenger coming soon...</div>}
-        {activeTab === 'privacy' && <div style={{ padding: '3rem', fontSize: '1.5rem', color: '#6b7280' }}>Privacy Tracker coming soon...</div>}
+        {activeTab === 'videos' && <Videos archivePath={archivePath} onChangeFolder={handleChangeFolder} />}
+
       </main>
     </div>
   );
