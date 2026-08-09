@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, Clock, MessageSquare, ShieldAlert, Book, FolderOpen, Video } from 'lucide-react';
+import { LayoutDashboard, Clock, MessageSquare, ShieldAlert, Book, FolderOpen, Video, Calendar } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { load } from '@tauri-apps/plugin-store';
 import Albums from './pages/Albums';
 import Videos from './pages/Videos';
+import Timeline from './pages/Timeline';
 
 // --- Sidebar Component ---
 function Sidebar({ activeTab, setActiveTab, archivePath, onChangeFolder }) {
   const navItems = [
     //{ id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
     { id: 'albums', label: 'Photo Albums', icon: Book },
-    { id: 'videos', label: 'Videos', icon: Video }
-    //{ id: 'timeline', label: 'Memory Timeline', icon: Clock },
+    { id: 'videos', label: 'Videos', icon: Video },
+    { id: 'timeline', label: 'Timeline', icon: Calendar },
     //{ id: 'messenger', label: 'Local Messenger', icon: MessageSquare },
     //{ id: 'privacy', label: 'Off-Facebook Apps', icon: ShieldAlert },
   ];
@@ -154,6 +155,7 @@ export default function App() {
       <main style={{ flex: 1, height: '100vh', overflowY: 'auto', boxSizing: 'border-box' }}>
         {activeTab === 'albums' && <Albums archivePath={archivePath} onChangeFolder={handleChangeFolder} />}
         {activeTab === 'videos' && <Videos archivePath={archivePath} onChangeFolder={handleChangeFolder} />}
+        {activeTab === 'timeline' && <Timeline archivePath={archivePath} onChangeFolder={handleChangeFolder} />}
 
       </main>
     </div>
