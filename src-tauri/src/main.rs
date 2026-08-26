@@ -5,7 +5,10 @@ mod messages;
 mod photos;
 mod videos;
 
-use photos::{delete_album_locally, get_albums_from_path, get_photos_by_year, save_photo_locally};
+use photos::{
+    delete_album_locally, get_albums_from_path, get_cover_photo_album, get_photos_by_year,
+    get_profile_pictures_album, save_photo_locally,
+};
 use videos::{get_videos_from_path, save_video_locally};
 
 fn main() {
@@ -19,7 +22,9 @@ fn main() {
             get_photos_by_year,
             save_photo_locally,
             save_video_locally,
-            delete_album_locally
+            delete_album_locally,
+            get_profile_pictures_album,
+            get_cover_photo_album,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

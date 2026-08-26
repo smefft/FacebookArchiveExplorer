@@ -119,6 +119,99 @@ fn load_all_raw_albums(albums_dir: &Path) -> Vec<(String, RawAlbum)> {
 }
 
 // external commands
+
+#[tauri::command]
+pub fn get_profile_pictures_album(base_path: String) -> Result<CleanAlbum, String> {
+    let root_path = PathBuf::from(&base_path);
+    let albums_dir = root_path.join("your_facebook_activity/posts/album");
+    if !albums_dir.exists() {
+        return Err(format!(
+            "Could not find the 'your_facebook_activity/posts/album' folder inside '{}'",
+            base_path
+        ));
+    }
+
+    let mut album: Option<CleanAlbum> = None;
+
+    for (id, raw_album) in load_all_raw_albums(&albums_dir) {
+        if raw_album.name.as_deref() == Some("Profile pictures") {
+            let cleaned_photos: Vec<CleanPhoto> = raw_album
+                .photos
+                .unwrap_or_default()
+                .iter()
+                .filter_map(|p| clean_photo(p, &root_path))
+                .collect();
+
+            let cover_photo = raw_album
+                .cover_photo
+                .as_ref()
+                .and_then(|p| clean_photo(p, &root_path))
+                .or_else(|| cleaned_photos.first().cloned());
+
+            if !cleaned_photos.is_empty() || cover_photo.is_some() {
+                album = Some(CleanAlbum {
+                    id,
+                    name: fix_fb_text(raw_album.name),
+                    description: fix_fb_text(raw_album.description),
+                    photo_count: cleaned_photos.len(),
+                    cover_photo,
+                    photos: cleaned_photos,
+                });
+            }
+
+            break; // found it, no need to keep scanning
+        }
+    }
+
+    album.ok_or_else(|| "Could not find a 'Profile pictures' album with photos".to_string())
+}
+
+#[tauri::command]
+pub fn get_cover_photo_album(base_path: String) -> Result<CleanAlbum, String> {
+    let root_path = PathBuf::from(&base_path);
+    let albums_dir = root_path.join("your_facebook_activity/posts/album");
+    if !albums_dir.exists() {
+        return Err(format!(
+            "Could not find the 'your_facebook_activity/posts/album' folder inside '{}'",
+            base_path
+        ));
+    }
+
+    let mut album: Option<CleanAlbum> = None;
+
+    for (id, raw_album) in load_all_raw_albums(&albums_dir) {
+        if raw_album.name.as_deref() == Some("Cover photos") {
+            let cleaned_photos: Vec<CleanPhoto> = raw_album
+                .photos
+                .unwrap_or_default()
+                .iter()
+                .filter_map(|p| clean_photo(p, &root_path))
+                .collect();
+
+            let cover_photo = raw_album
+                .cover_photo
+                .as_ref()
+                .and_then(|p| clean_photo(p, &root_path))
+                .or_else(|| cleaned_photos.first().cloned());
+
+            if !cleaned_photos.is_empty() || cover_photo.is_some() {
+                album = Some(CleanAlbum {
+                    id,
+                    name: fix_fb_text(raw_album.name),
+                    description: fix_fb_text(raw_album.description),
+                    photo_count: cleaned_photos.len(),
+                    cover_photo,
+                    photos: cleaned_photos,
+                });
+            }
+
+            break; // found it, no need to keep scanning
+        }
+    }
+
+    album.ok_or_else(|| "Could not find a 'Cover photos' album with photos".to_string())
+}
+
 #[tauri::command]
 pub fn get_albums_from_path(base_path: String) -> Result<Vec<CleanAlbum>, String> {
     let root_path = PathBuf::from(&base_path);

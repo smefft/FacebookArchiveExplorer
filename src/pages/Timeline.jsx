@@ -13,7 +13,7 @@ import { join } from '@tauri-apps/api/path';
 
 
 // --- Timeline Component ---
-export default function Timeline({ archivePath, onChangeFolder }) {
+export default function Timeline({ archivePath }) {
     const [years, setYears] = useState([]);
     const [selectedYear, setSelectedYear] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -149,48 +149,6 @@ export default function Timeline({ archivePath, onChangeFolder }) {
             console.error(err);
         }
     };
-
-    // ==========================================
-    // VIEW 0: Initial Onboarding / Folder Selection
-    // ==========================================
-    if (!archivePath) {
-        return (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '80vh', padding: '2rem', textAlign: 'center' }}>
-                <div style={{ background: '#f3f4f6', padding: '1.5rem', borderRadius: '50%', marginBottom: '1.5rem' }}>
-                    <FolderOpen size={48} color="#4f46e5" />
-                </div>
-                <h2 style={{ fontSize: '1.8rem', color: '#111827', margin: '0 0 0.5rem 0' }}>Select Your Facebook Data Archive</h2>
-                <p style={{ color: '#6b7280', maxWidth: '450px', marginBottom: '2rem', lineHeight: '1.5' }}>
-                    Choose the main folder that was extracted from your Facebook export zip file (typically named <strong>facebook-yourusername</strong> or <strong>my_fb_data</strong>).
-                </p>
-                <button
-                    onClick={onChangeFolder}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '0.75rem',
-                        padding: '0.85rem 1.75rem',
-                        background: '#4f46e5',
-                        color: '#ffffff',
-                        border: 'none',
-                        borderRadius: '8px',
-                        fontSize: '1rem',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                        boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)'
-                    }}
-                >
-                    <FolderOpen size={20} /> Open Archive Folder
-                </button>
-
-                {error && (
-                    <div style={{ marginTop: '1.5rem', padding: '1rem', background: '#fee2e2', color: '#b91c1c', borderRadius: '8px', maxWidth: '500px', fontSize: '0.9rem' }}>
-                        <strong>Error:</strong> {error}
-                    </div>
-                )}
-            </div>
-        );
-    }
 
     if (loading) {
         return <div style={{ padding: '3rem', textAlign: 'center', color: '#6b7280' }}><p>Sorting photos by year...</p></div>;
@@ -419,16 +377,7 @@ export default function Timeline({ archivePath, onChangeFolder }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                 <div>
                     <h1 style={{ margin: '0 0 0.5rem 0', fontSize: '2rem', color: '#111827' }}>Photo Timeline</h1>
-                    <p style={{ color: '#6b7280', margin: 0, fontSize: '0.95rem' }}>
-                        Reading from: <code style={{ background: '#f3f4f6', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>{archivePath}</code>
-                    </p>
                 </div>
-                <button
-                    onClick={onChangeFolder}
-                    style={{ padding: '0.5rem 1rem', border: '1px solid #d1d5db', background: '#fff', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}
-                >
-                    Change Folder
-                </button>
             </div>
 
             {error && (

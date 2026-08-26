@@ -11,7 +11,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { open, save } from '@tauri-apps/plugin-dialog';
 
 // --- Videos Component ---
-export default function Videos({ archivePath, onChangeFolder }) {
+export default function Videos({ archivePath }) {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -181,9 +181,6 @@ export default function Videos({ archivePath, onChangeFolder }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                 <div>
                     <h1 style={{ margin: '0 0 0.5rem 0', fontSize: '2rem', color: '#111827' }}>Your Videos</h1>
-                    <p style={{ color: '#6b7280', margin: 0, fontSize: '0.95rem' }}>
-                        {videos.length} videos &middot; Reading from: <code style={{ background: '#f3f4f6', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>{archivePath}</code>
-                    </p>
                 </div>
                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                     <button
@@ -197,12 +194,6 @@ export default function Videos({ archivePath, onChangeFolder }) {
                     >
                         <Download size={16} />
                         {isDownloading ? downloadStatus : 'Download All'}
-                    </button>
-                    <button
-                        onClick={() => onChangeFolder && onChangeFolder()}
-                        style={{ padding: '0.5rem 1rem', border: '1px solid #d1d5db', background: '#fff', borderRadius: '6px', cursor: 'pointer', fontSize: '0.85rem' }}
-                    >
-                        Change Folder
                     </button>
                 </div>
             </div>
