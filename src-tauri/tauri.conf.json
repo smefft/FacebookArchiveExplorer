@@ -1,18 +1,18 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "facebook_data_explorer",
+  "productName": "Facebook Data Explorer",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "com.facebookdataexplorer.dev",
   "build": {
-    "frontendDist": "..dist",
-    "devUrl": "http://localhost:5173",
     "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build"
+    "beforeBuildCommand": "npm run build",
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
   },
   "app": {
     "windows": [
       {
-        "title": "Facebook Archive Explorer",
+        "title": "",
         "width": 1000,
         "height": 700,
         "minWidth": 600,

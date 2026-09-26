@@ -19,9 +19,9 @@ A tool to explore your own downloaded facebook data. Your files never touch the 
 ```
 3. Run in development mode:
 ```bash
-   npx tauri dev
+   npm run tauri dev
 ```
 4. Build for production:
 ```bash
-   npx tauri build
+   npm run tauri build
 ```
