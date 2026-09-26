@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { readDir, readTextFile, exists } from '@tauri-apps/plugin-fs';
-import { Camera, MapPin, Calendar, ImageIcon, FolderOpen } from 'lucide-react';
+import { Camera, MapPin, ImageIcon, FolderOpen } from 'lucide-react';
 import { invoke } from '@tauri-apps/api/core';
 
 export function useProfileMedia({ archivePath }) {
@@ -64,6 +63,7 @@ const TABS = [
     { id: 'timeline', label: 'Timeline' },
     { id: 'albums', label: 'Photo Albums' },
     { id: 'videos', label: 'Videos' },
+    { id: 'friends', label: 'Friends' },
 ];
 
 export default function ProfileHeader({ archivePath, activeTab, setActiveTab, setSelectedAlbum, onChangeFolder }) {

@@ -3,6 +3,7 @@ import { FolderOpen } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { load } from '@tauri-apps/plugin-store';
 import Albums from './pages/Albums';
+import Friends from './pages/Friends';
 import Videos from './pages/Videos';
 import Timeline from './pages/Timeline';
 import ProfileHeader from './components/ProfileHeader';
@@ -84,23 +85,7 @@ export default function App() {
         {activeTab === 'albums' && <Albums archivePath={archivePath} setSelectedAlbum={setSelectedAlbum} selectedAlbum={selectedAlbum} />}
         {activeTab === 'videos' && <Videos archivePath={archivePath} />}
         {activeTab === 'timeline' && <Timeline archivePath={archivePath} />}
-      </div>
-
-      <div style={{ maxWidth: '940px', margin: '0 auto', padding: '0 1.5rem 1.5rem', textAlign: 'right' }}>
-        <button
-          onClick={handleChangeFolder}
-          style={{
-            padding: '0.5rem 0.9rem',
-            border: '1px solid #d1d5db',
-            background: '#fff',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '0.85rem',
-            color: '#374151'
-          }}
-        >
-          Change Folder
-        </button>
+        {activeTab === 'friends' && <Friends archivePath={archivePath} />}
       </div>
     </div>
   );
