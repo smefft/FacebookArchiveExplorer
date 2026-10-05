@@ -25,3 +25,10 @@ A tool to explore your own downloaded facebook data. Your files never touch the 
 ```bash
    npm run tauri build
 ```
+
+## Deploy
+
+```bash
+git tag app-v0.1.0
+git push origin app-v0.1.0
+```

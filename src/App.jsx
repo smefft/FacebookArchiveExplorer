@@ -7,6 +7,7 @@ import Friends from './pages/Friends';
 import Videos from './pages/Videos';
 import Timeline from './pages/Timeline';
 import ProfileHeader from './components/ProfileHeader';
+import OnboardingScreen from './components/OnboardingScreen';
 
 // --- Main App Component ---
 export default function App() {
@@ -57,23 +58,7 @@ export default function App() {
 
   // No archive selected yet -> onboarding screen, blocks the whole app
   if (!archivePath) {
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', padding: '2rem', textAlign: 'center' }}>
-        <div style={{ background: '#f3f4f6', padding: '1.5rem', borderRadius: '50%', marginBottom: '1.5rem' }}>
-          <FolderOpen size={48} color="#4f46e5" />
-        </div>
-        <h2 style={{ fontSize: '1.8rem', color: '#111827', margin: '0 0 0.5rem 0' }}>Select Your Facebook Data Archive</h2>
-        <p style={{ color: '#6b7280', maxWidth: '450px', marginBottom: '2rem', lineHeight: '1.5' }}>
-          Choose the main folder extracted from your Facebook export zip file.
-        </p>
-        <button
-          onClick={handleSelectFolder}
-          style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.85rem 1.75rem', background: '#4f46e5', color: '#fff', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: '600', cursor: 'pointer' }}
-        >
-          <FolderOpen size={20} /> Open Archive Folder
-        </button>
-      </div>
-    );
+    return <OnboardingScreen handleSelectFolder={handleSelectFolder} />
   }
 
   // Archive is selected -> render the profile-style app
