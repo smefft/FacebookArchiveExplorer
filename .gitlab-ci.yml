@@ -14,13 +14,13 @@ cache:
 
 .build_template: &build_artifacts
   artifacts:
-    expire_in: 1 week
+    expire_in: 30 minutes
     paths:
       - src-tauri/target/release/bundle/
 
 build-linux:
   stage: build
-  image: rust:1.77.2
+  image: rust:latest
   <<: *build_artifacts
   before_script:
     - apt-get update
