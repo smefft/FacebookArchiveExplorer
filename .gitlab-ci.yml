@@ -24,9 +24,10 @@ build-linux:
   <<: *build_artifacts
   before_script:
     - apt-get update
-    - apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
-    - curl -fsSL https://deb.nodesource.com/setup_23.x | bash -
-    - apt-get install -y nodejs
+    - apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev xz-utils
+    - curl -fsSL https://nodejs.org/dist/v23.11.0/node-v23.11.0-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
+    - node --version
+    - npm --version
     - npm ci
   script:
     - npm run tauri build
@@ -53,3 +54,12 @@ build-macos:
     - npm ci
   script:
     - npm run tauri build
+    - |
+      DMG=$(ls src-tauri/target/release/bundle/dmg/*.dmg)
+      hdiutil convert "$DMG" -format UDRW -o /tmp/rw.dmg
+      MOUNT=$(hdiutil attach /tmp/rw.dmg -nobrowse -readwrite | grep -o '/Volumes/.*')
+      cp README.txt LICENSE.txt "$MOUNT/"
+      hdiutil detach "$MOUNT"
+      rm "$DMG"
+      hdiutil convert /tmp/rw.dmg -format UDZO -o "$DMG"
+      rm /tmp/rw.dmg
