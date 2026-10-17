@@ -39,7 +39,10 @@ build-windows:
   <<: *build_artifacts
   before_script:
     - choco install -y nodejs-lts rustup.install
-    - refreshenv
+    - Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+    - Update-SessionEnvironment
+    - node --version
+    - cargo --version
     - npm ci
   script:
     - npm run tauri build
