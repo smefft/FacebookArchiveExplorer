@@ -1,6 +1,17 @@
+
+<div align="center">
+<img src="app-icon.png" width="200">
+</div>
+
 # Description
 
 A tool to explore your own downloaded facebook data. Your files never touch the internet and we never have access to them. The tool merely gives you a user friendly way to peruse your downloaded facebook data. This way you don't have to dig through directories of json files to find the meaningful stuff you may want to save even after you delete your account.
+
+## Preview
+
+![Alt text](preview-onboarding.png)
+![Alt text](preview.png)
+
 
 ## Prerequisites
 
@@ -30,5 +41,5 @@ A tool to explore your own downloaded facebook data. Your files never touch the 
 
 ```bash
 git tag app-v0.1.0
-git push origin app-v0.1.0
+git push app-v0.1.0
 ```

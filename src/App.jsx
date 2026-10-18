@@ -16,7 +16,6 @@ Copyright (C) 2026 Sandra Effert
 */
 
 import React, { useState, useEffect } from 'react';
-import { FolderOpen } from 'lucide-react';
 import { open } from '@tauri-apps/plugin-dialog';
 import { load } from '@tauri-apps/plugin-store';
 import Albums from './pages/Albums';
@@ -81,7 +80,7 @@ export default function App() {
   // Archive is selected -> render the profile-style app
   return (
     <div style={{ minHeight: '100vh', fontFamily: 'system-ui, -apple-system, sans-serif', backgroundColor: '#f0f2f5' }}>
-      <ProfileHeader archivePath={archivePath} activeTab={activeTab} setActiveTab={setActiveTab} setSelectedAlbum={setSelectedAlbum} onChangeFolder={handleSelectFolder} />
+      <ProfileHeader archivePath={archivePath} activeTab={activeTab} setActiveTab={setActiveTab} setSelectedAlbum={setSelectedAlbum} onChangeFolder={handleChangeFolder} />
 
       <div style={{ maxWidth: '940px', margin: '0 auto', padding: '1.5rem' }}>
         {activeTab === 'albums' && <Albums archivePath={archivePath} setSelectedAlbum={setSelectedAlbum} selectedAlbum={selectedAlbum} />}

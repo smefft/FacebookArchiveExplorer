@@ -1,6 +1,6 @@
 INTRODUCTION
 
-This tool merely gives you a user friendly way to peruse your downloaded facebook data.
+This tool gives you a user friendly way to peruse your downloaded facebook data.
 This way you don't have to dig through directories of json files to find the meaningful
 stuff you may want to save even after you delete your account.
 
