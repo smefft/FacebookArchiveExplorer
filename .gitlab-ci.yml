@@ -14,7 +14,7 @@ cache:
 
 .build_template: &build_artifacts
   artifacts:
-    expire_in: 30 minutes
+    expire_in: 1 week
     paths:
       - src-tauri/target/release/bundle/
 
@@ -51,14 +51,14 @@ build-macos:
   stage: build
   tags:
     - macos
-  <<: *build_artifacts
   before_script:
     - export PATH="/opt/homebrew/bin:$HOME/.cargo/bin:$PATH"
+    - rustup target add aarch64-apple-darwin x86_64-apple-darwin
     - npm ci
   script:
-    - npm run tauri build
+    - npm run tauri build -- --target universal-apple-darwin
     - |
-      DMG=$(ls src-tauri/target/release/bundle/dmg/*.dmg)
+      DMG=$(ls src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg)
       hdiutil convert "$DMG" -format UDRW -o /tmp/rw.dmg
       MOUNT=$(hdiutil attach /tmp/rw.dmg -nobrowse -readwrite | grep -o '/Volumes/.*')
       cp README.txt LICENSE.txt "$MOUNT/"
@@ -66,3 +66,7 @@ build-macos:
       rm "$DMG"
       hdiutil convert /tmp/rw.dmg -format UDZO -o "$DMG"
       rm /tmp/rw.dmg
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - src-tauri/target/universal-apple-darwin/release/bundle/
